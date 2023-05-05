@@ -10,5 +10,35 @@ package Entity;
  * @author hanin
  */
 public class Station {
-    
+        private int id;
+        private String long_alt;
+
+    public Station(int id, String long_alt) {
+        this.id = id;
+        this.long_alt = long_alt;
+    }
+
+    public Station(String long_alt) {
+        this.long_alt = long_alt;
+    }
+
+    public Station() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getLong_alt() {
+        return long_alt;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLong_alt(String long_alt) {
+        this.long_alt = long_alt;
+    }
+        
 }
