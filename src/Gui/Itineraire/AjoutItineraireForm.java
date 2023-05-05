@@ -7,15 +7,24 @@ package Gui.Itineraire;
 
 import Entity.Iteneraire;
 import com.codename1.components.InfiniteProgress;
+import com.codename1.components.ScaleImageLabel;
+import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
+import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.Tabs;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 
 /**
@@ -32,6 +41,12 @@ public class AjoutItineraireForm extends BaseForm{
     getTitleArea().setUIID("container");
     setTitle("ajout itineraire");
     getContentPane().setScrollVisible(false);
+    tb.addSearchCommand((e)->{});
+    Tabs swipe = new Tabs();
+    Label s1 = new Label();
+    Label s2 = new Label();
+    
+    
     
     TextField pts_depart = new TextField("","point du depart");
     pts_depart.setUIID("TextFieldBlack");
@@ -64,7 +79,13 @@ public class AjoutItineraireForm extends BaseForm{
         }catch(Exception ex){
             ex.printStackTrace();}
     });
-    
+    Button btnHome = new Button("Home");
+add(btnHome);
+
+btnHome.addActionListener((e) -> {
+    ItineraireHome home = new ItineraireHome ();
+    home.show();
+});
     
 }
     public void addStringValue(String s, Component v){
@@ -73,5 +94,7 @@ public class AjoutItineraireForm extends BaseForm{
         add(createLineSeparator(0xeeeeee));
                 
     }
+
+   
     
 }

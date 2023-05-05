@@ -32,6 +32,11 @@ public class Iteneraire {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Iteneraire{" + "id=" + id + ", pts_depart=" + pts_depart + ", pts_arrive=" + pts_arrive + '}';
+    }
+
     public void setId(int id) {
         this.id = id;
     }
