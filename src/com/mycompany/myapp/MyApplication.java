@@ -1,6 +1,7 @@
 package com.mycompany.myapp;
 
 
+import Gui.Itineraire.AjoutItineraireForm;
 import Gui.Reservation.ReservationHome;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
@@ -52,7 +53,7 @@ public class MyApplication {
             current.show();
             return;
         }
-       new ReservationHome().show();
+       new AjoutItineraireForm(theme).show();
        
     }
 
