@@ -75,6 +75,6 @@ public class AddUser extends Form{
     
         // Add the label to the MainForm
          addComponent(login);
+         
 }
-   
 }

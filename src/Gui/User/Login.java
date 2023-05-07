@@ -43,9 +43,19 @@ public class Login extends Form {
             new AddUser().show();
            }
           });
+        addComponent(addU);
+        Label forget = new Label("Mot de passe oublié ?");
+        forget.getUnselectedStyle().setUnderline(true);
     
+        // Add a PointerPressedListener to the label to show the SecondForm
+        forget.addPointerPressedListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+            new ForgetEmail().show();
+           }
+          });
         // Add the label to the MainForm
-         addComponent(addU);
+         addComponent(forget);
        }
     
     
