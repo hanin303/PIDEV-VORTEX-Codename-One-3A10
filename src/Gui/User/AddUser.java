@@ -7,6 +7,7 @@ package Gui.User;
 import Entity.Role;
 import Entity.User;
 import Services.ServiceUser;
+import com.codename1.capture.Capture;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.Switch;
 import com.codename1.ui.Button;
@@ -22,6 +23,11 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.spinner.Picker;
+import com.codename1.io.File;
+import com.codename1.io.FileSystemStorage;
+import com.codename1.io.Util;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 
 /**
@@ -29,14 +35,46 @@ import com.codename1.ui.spinner.Picker;
  * @author MSI
  */
 public class AddUser extends Form{
-    
+    private String imagePath;
     private boolean isValidEmail(String email) {
     String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     int atIndex = email.indexOf('@');
     int dotIndex = email.lastIndexOf('.');
 
     return (atIndex > 0 && dotIndex > atIndex);
+    
 }
+    private void capturePhoto() {
+        try {
+            long timestamp = System.currentTimeMillis();
+            //String imagePath = Capture.capturePhoto();
+            String imagePath = Capture.capturePhoto();
+            String targetPath="C:\\xampp\\htdocs\\images"+ timestamp + ".jpg";
+            InputStream inputStream = FileSystemStorage.getInstance().openInputStream(imagePath);
+
+            // Open an output stream for the target path
+            OutputStream outputStream = FileSystemStorage.getInstance().openOutputStream(targetPath);
+
+            // Copy the contents from the input stream to the output stream
+            Util.copy(inputStream, outputStream);
+
+            // Close the streams
+            inputStream.close();
+            outputStream.close();
+            imagePath = targetPath;
+            // Rename the captured photo file to the unique name
+            FileSystemStorage.getInstance().rename(imagePath, timestamp + ".jpg");
+            Dialog.show("Image Upload", "Votre photo a été téléchargé avec succés", "OK", null);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Dialog.show("Image Upload", "Echec lors de téléchargement d'image ", "OK", null);
+        }
+    }
+
+    
+    public String getImagePath() {
+        return imagePath;
+    }
     public AddUser() {
         setTitle("Inscription");
         setLayout(BoxLayout.yCenter());
@@ -62,6 +100,8 @@ public class AddUser extends Form{
         Label lcin = new Label("Numéro de carte d'identité:");
         TextField tcin = new TextField("","Votre numéro de carte d'identité");
         tcin.setConstraint(TextField.NUMERIC);
+        Button uploadButton = new Button("Choisir photo");
+        uploadButton.addActionListener(evt -> capturePhoto());
         Button addU = new Button("s'inscrire");
         addU.addActionListener((new ActionListener() {
             @Override
@@ -94,7 +134,9 @@ public class AddUser extends Form{
                 }
             } }
         }));
-        addAll(lnom,tnom,lprenom,tprenom,lusername,tusername,lemail,temail,lmdp,tmdp,lmdp2,tmdp2,lnum_tel,tnum_tel,lcin,tcin,addU);
+        addAll(lnom,tnom,lprenom,tprenom,lusername,tusername,lemail,temail,lmdp,tmdp,lmdp2,tmdp2,lnum_tel,tnum_tel,lcin,tcin);
+        add(uploadButton);
+        add(addU);
         Label login = new Label("Vous avez déjà un compte ?");
         login.getUnselectedStyle().setUnderline(true);
     
