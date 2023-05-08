@@ -12,6 +12,8 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Border;
@@ -23,12 +25,12 @@ import java.util.ArrayList;
  * @author MSI
  */
 public class DisplayUser extends Form{
-    public DisplayUser(){
+    public DisplayUser(Form previous){
         setTitle("Liste des utilisateurs");
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         ArrayList<User> users = ServiceUser.getInstance().getAllUsers();
-        User usr = ServiceUser.getService().getUser(5);
-        System.out.println("user"+usr);
+        //User usr = ServiceUser.getService().getUser(5);
+        //System.out.println("user"+usr);
         System.out.println(users);
 
         for( User user: users) {
@@ -40,9 +42,9 @@ public class DisplayUser extends Form{
             card.getStyle().setBgColor(0xFFFFFF);
             System.out.println(user.getId_user());
             Label id = new Label("ID: " + user.getId_user());
-            Label nom = new Label("Nom" + user.getNom());
-            Label prenom = new Label("Prénom" + user.getPrenom());
-            Label username = new Label("Usernale" + user.getUsername());
+            Label nom = new Label("Nom: " + user.getNom());
+            Label prenom = new Label("Prénom: " + user.getPrenom());
+            Label username = new Label("Username: " + user.getUsername());
             Label email = new Label("E-mail" + user.getEmail());
             Label num_tel = new Label("Numéro téléphone" + user.getNum_tel());
             Label cin = new Label("CIN" + user.getCin());
@@ -70,6 +72,11 @@ public class DisplayUser extends Form{
             Button modif = new Button("Modifer");
             modif.addActionListener((evt) -> {
                 new EditProfile(user.getId_user()).show();
+            });
+            supp.addActionListener((evt) -> {
+                ServiceUser.getInstance().deleteUser(user.getId_user());
+                DisplayUser refresh = new DisplayUser(previous);
+                refresh.show();
             });
             //card.add(BorderLayout.CENTER, supp);
             //card.add(BorderLayout.CENTER, modif);

@@ -19,7 +19,8 @@ public class User {
     private int num_tel;
     private int cin;
     private String image;
-    private  Role role; 
+    private  Role role;
+    private int id_role;
     
     public User(){
         
@@ -115,6 +116,14 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public int getId_role() {
+        return id_role;
+    }
+
+    public void setId_role(int id_role) {
+        this.id_role = id_role;
     }
 
     public void setUsername(String username) {
