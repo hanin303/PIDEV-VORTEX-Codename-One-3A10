@@ -12,7 +12,6 @@ import com.codename1.ui.events.ActionListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +43,24 @@ public class ServiceUser {
         }
         return instance;
     }
+    public boolean deleteUser(int id){
+        String url= Statics.BASE_URL+"api/delete";
+        request.addArgument("id",String.valueOf(id));
+        request.setUrl(url);
+        request.setPost(true);
+
+        request.addResponseListener(new ActionListener<NetworkEvent>(){
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = request.getResponseCode()==200;
+                request.removeResponseCodeListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return resultOK;
+
+
+    }
     public boolean addUser(User u){
         String url= Statics.BASE_URL+"api/add";
         request.addArgument("nom", u.getNom());
@@ -71,12 +88,14 @@ public class ServiceUser {
     }
     private User parseUser(String jsonText){
         User u= new User();
-        try{
+        try {
             JSONParser j = new JSONParser();
             Map<String,Object> obj = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
             float id = Float.parseFloat(obj.get("id").toString());
-            float cin = Float.parseFloat(obj.get("cin").toString());
+            float cin = Float.parseFloat(obj.get("CIN").toString());
             float num_tel = Float.parseFloat(obj.get("num_tel").toString());
+            float id_role = Float.parseFloat(obj.get("id_role").toString());
+            u.setId_role((int)id_role);
             u.setId_user((int)id);
             u.setUsername(obj.get("username").toString());
             System.out.println("iduser "+u.getId_user());
@@ -91,10 +110,10 @@ public class ServiceUser {
             u.setMdp(obj.get("password").toString());
             u.setPrenom(obj.get("prenom").toString());
             u.setNom(obj.get("nom").toString());
-            users.add(u);
 
-        } catch (IOException io){
 
+        } catch (IOException exp){
+            System.out.println("ioexp"+exp.getMessage());
         }
         return u;
     }
@@ -112,6 +131,8 @@ public class ServiceUser {
                 float id = Float.parseFloat(obj.get("id").toString());
                 float cin = Float.parseFloat(obj.get("CIN").toString());
                 float num_tel = Float.parseFloat(obj.get("num_tel").toString());
+                float id_role = Float.parseFloat(obj.get("id_role").toString());
+                u.setId_role((int)id_role);
                 u.setId_user((int)id);
                 u.setUsername(obj.get("username").toString());
                 System.out.println("iduser "+u.getId_user());
@@ -152,16 +173,16 @@ public class ServiceUser {
         return users;
     }
     public User getUser(int id){
-        String url= Statics.BASE_URL+"api/show?id=6";
+        String url= Statics.BASE_URL+"api/show?id="+id;
         request.setPost(true);
         request.setUrl(url);
         final User[] user = new User[1];
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent networkEvent) {
-                System.out.println("resp "+new String(request.getResponseData()));
+              //  System.out.println("resp "+new String(request.getResponseData()));
                 user[0] = parseUser(new String(request.getResponseData()));
-                System.out.println("users"+users.toString());
+               // System.out.println("users"+users.toString());
                 request.removeResponseListener(this);
             }
         });
