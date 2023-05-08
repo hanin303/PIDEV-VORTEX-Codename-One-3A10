@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="PIDEV-VORTEX-Codename-One-3A10">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/CodeNameOneBuildClient.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaSE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

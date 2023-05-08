@@ -2,14 +2,9 @@ package com.mycompany.myapp;
 
 
 import Gui.Reservation.ReservationHome;
-import Gui.User.AddUser;
+import Gui.User.*;
 import Gui.Role.AddRole;
-import Gui.User.Login;
-import Gui.User.ForgetEmail;
-import Gui.User.ForgetCode;
-import Gui.User.ChangePassword;
-import Gui.User.EditProfile;
-import Gui.User.AddAdmin;
+
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
@@ -60,7 +55,7 @@ public class MyApplication {
             current.show();
             return;
         }
-       new AddAdmin().show();
+       new DisplayUser().show();
        
     }
 
