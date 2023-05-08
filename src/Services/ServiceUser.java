@@ -151,22 +151,22 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(request);
         return users;
     }
-    public ArrayList<User> getUser(){
-        String url= Statics.BASE_URL+"api/show";
+    public User getUser(int id){
+        String url= Statics.BASE_URL+"api/show?id=6";
         request.setPost(true);
-        request.set
         request.setUrl(url);
+        final User[] user = new User[1];
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent networkEvent) {
                 System.out.println("resp "+new String(request.getResponseData()));
-                users = parseUsers(new String(request.getResponseData()));
+                user[0] = parseUser(new String(request.getResponseData()));
                 System.out.println("users"+users.toString());
                 request.removeResponseListener(this);
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(request);
-        return users;
+        return user[0];
     }
 
 }
