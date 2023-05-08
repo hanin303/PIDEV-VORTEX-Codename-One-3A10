@@ -102,7 +102,7 @@ updateButton.addActionListener(e -> {
         Services.ServiceItineraire.getInstance().modifierItineraire(itineraire.getId(),ptsd2, ptsa2);
 
         // Show a confirmation message to the user
-        Dialog.show("Success", "Station updated successfully", "OK", null);
+        Dialog.show("Success", "Iteneraire updated successfully", "OK", null);
         AffichageItineraire refresh = new AffichageItineraire(previous);
       refresh.show();
     });
