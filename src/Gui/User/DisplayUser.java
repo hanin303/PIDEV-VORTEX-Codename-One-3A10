@@ -68,6 +68,9 @@ public class DisplayUser extends Form{
 
             Button supp = new Button("Supprimer");
             Button modif = new Button("Modifer");
+            modif.addActionListener((evt) -> {
+                new EditProfile(user.getId_user()).show();
+            });
             //card.add(BorderLayout.CENTER, supp);
             //card.add(BorderLayout.CENTER, modif);
             card.addAll(id,nom,prenom,username,email,num_tel,cin,supp,modif);
