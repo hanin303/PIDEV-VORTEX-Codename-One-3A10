@@ -1,6 +1,7 @@
 package com.mycompany.myapp;
 
 
+import Gui.Ligne.ListLigne;
 import Gui.Reservation.ReservationHome;
 import Gui.Station.StationHome;
 import Gui.Ticket.TicketHome;
@@ -50,8 +51,9 @@ public class MyApplication {
             return;
         }
        //new StationHome().show();
-       new ReservationHome().show();
+      // new ReservationHome().show();
        //new TicketHome().show();
+         new ListLigne(current).show();
     }
 
     public void stop() {
