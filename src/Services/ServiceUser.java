@@ -70,9 +70,33 @@ public class ServiceUser {
         return resultOK;
     }
     private User parseUser(String jsonText){
-        User user= new User();
+        User u= new User();
+        try{
+            JSONParser j = new JSONParser();
+            Map<String,Object> obj = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            float id = Float.parseFloat(obj.get("id").toString());
+            float cin = Float.parseFloat(obj.get("cin").toString());
+            float num_tel = Float.parseFloat(obj.get("num_tel").toString());
+            u.setId_user((int)id);
+            u.setUsername(obj.get("username").toString());
+            System.out.println("iduser "+u.getId_user());
+            u.setCin((int)cin);
+            u.setNum_tel((int)num_tel);
+            if(obj.get("image")!=null){
+                u.setImage(obj.get("image").toString());
+            }
+            else {
+                System.out.println("image null");
+            }
+            u.setMdp(obj.get("password").toString());
+            u.setPrenom(obj.get("prenom").toString());
+            u.setNom(obj.get("nom").toString());
+            users.add(u);
 
-        return user;
+        } catch (IOException io){
+
+        }
+        return u;
     }
     public ArrayList<User> parseUsers(String jsonText) {
         try {
@@ -114,6 +138,23 @@ public class ServiceUser {
     public ArrayList<User> getAllUsers(){
         String url= Statics.BASE_URL+"api/showAll";
         request.setPost(true);
+        request.setUrl(url);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent networkEvent) {
+                System.out.println("resp "+new String(request.getResponseData()));
+                users = parseUsers(new String(request.getResponseData()));
+                System.out.println("users"+users.toString());
+                request.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return users;
+    }
+    public ArrayList<User> getUser(){
+        String url= Statics.BASE_URL+"api/show";
+        request.setPost(true);
+        request.set
         request.setUrl(url);
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

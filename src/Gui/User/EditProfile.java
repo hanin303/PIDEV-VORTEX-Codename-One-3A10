@@ -16,7 +16,7 @@ import com.codename1.ui.layouts.BoxLayout;
  * @author MSI
  */
 public class EditProfile extends Form{
-    public EditProfile(){
+    public EditProfile(int id){
         setTitle("Mon profile");
         setLayout(BoxLayout.yCenter());
         Label lnom = new Label("nom:");

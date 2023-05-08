@@ -41,6 +41,7 @@ public class AddUser extends Form{
         TextField temail = new TextField("","votre adresse e-mail");
         Label lmdp = new Label("Mot de passe:");
         TextField tmdp = new TextField();
+        TextField tconfirmmdp = new TextField();
         tmdp.setHint("votre mot de passe");
         tmdp.setConstraint(TextField.PASSWORD);
         Label lnum_tel = new Label("Numéro de téléphone:");

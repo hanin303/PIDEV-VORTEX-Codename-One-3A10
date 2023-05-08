@@ -25,13 +25,13 @@ import java.util.ArrayList;
 public class DisplayUser extends Form{
     public DisplayUser(){
         setTitle("Liste des utilisateurs");
-        setLayout(BoxLayout.yCenter());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         ArrayList<User> users = ServiceUser.getInstance().getAllUsers();
         System.out.println(users);
 
         for( User user: users) {
 
-            Container card = new Container(new BorderLayout());
+            Container card = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             card.getStyle().setBorder(Border.createLineBorder(1, ColorUtil.GRAY));
             card.getStyle().setMarginUnit(Style.UNIT_TYPE_DIPS);
             card.getStyle().setMargin(Component.BOTTOM, 2);
@@ -53,15 +53,22 @@ public class DisplayUser extends Form{
             num_tel.getStyle().setFgColor(0x000000);
             cin.getStyle().setFgColor(0x000000);
             //role.getStyle().setFgColor(0x000000);
-            card.add(BorderLayout.CENTER, BoxLayout.encloseY(num_tel));
-          //  card.add(BorderLayout, cin);
-            card.addAll(id,nom,prenom,username,email,num_tel);
+            /*
+            card.add(BorderLayout.CENTER, BoxLayout.encloseY(id));
+            card.add(BorderLayout.NORTH, nom);
+            card.add(BorderLayout.NORTH, prenom);
+            card.add(BorderLayout.NORTH, username);
+            card.add(BorderLayout.NORTH, email);
+            card.add(BorderLayout.NORTH,num_tel);
+            card.add(BorderLayout.NORTH, cin);
             //card.add(BorderLayout.NORTH, role);
-            
+           */
+
             Button supp = new Button("Supprimer");
             Button modif = new Button("Modifer");
-            card.add(BorderLayout.CENTER, supp);
-            card.add(BorderLayout.CENTER, modif);
+            //card.add(BorderLayout.CENTER, supp);
+            //card.add(BorderLayout.CENTER, modif);
+            card.addAll(id,nom,prenom,username,email,num_tel,cin,supp,modif);
             //addAll(card,supp, modif)s
             this.add(card);
         }
