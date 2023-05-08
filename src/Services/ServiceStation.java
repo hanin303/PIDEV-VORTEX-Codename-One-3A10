@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.json.JSONException;
+//import org.json.JSONException;
 
 
 /**
@@ -125,7 +125,7 @@ public void modifierStation(int id, String long_alt) {
             try {
                 Map<String, Object> response = parser.parseJSON(new CharArrayReader(new String(req.getResponseData()).toCharArray()));
                 System.out.println(response);
-            } catch (IOException | JSONException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
