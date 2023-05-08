@@ -71,6 +71,10 @@ public class DisplayUser extends Form{
             modif.addActionListener((evt) -> {
                 new EditProfile(user.getId_user()).show();
             });
+            supp.addActionListener((evt) -> {
+                ServiceUser.getInstance().deleteUser(user.getId_user());
+
+            });
             //card.add(BorderLayout.CENTER, supp);
             //card.add(BorderLayout.CENTER, modif);
             card.addAll(id,nom,prenom,username,email,num_tel,cin,supp,modif);
