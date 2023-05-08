@@ -55,7 +55,8 @@ public class MyApplication {
             current.show();
             return;
         }
-       new DisplayUser(current).show();
+       //new DisplayUser(current).show();
+       new AddUser().show();
        
     }
 

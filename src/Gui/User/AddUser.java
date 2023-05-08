@@ -41,9 +41,12 @@ public class AddUser extends Form{
         TextField temail = new TextField("","votre adresse e-mail");
         Label lmdp = new Label("Mot de passe:");
         TextField tmdp = new TextField();
-        TextField tconfirmmdp = new TextField();
         tmdp.setHint("votre mot de passe");
         tmdp.setConstraint(TextField.PASSWORD);
+        Label lmdp2 = new Label("Comfirmation mot de passe:");
+        TextField tmdp2 = new TextField();
+        tmdp2.setHint("Entrer votre mot de passe de nouveau");
+        tmdp2.setConstraint(TextField.PASSWORD);
         Label lnum_tel = new Label("Numéro de téléphone:");
         TextField tnum_tel = new TextField("","votre numéro de téléphone");
         tnum_tel.setConstraint(TextField.PHONENUMBER);
@@ -54,15 +57,19 @@ public class AddUser extends Form{
         addU.addActionListener((new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                if(tmdp.getText().equals(tmdp2.getText())){
                 User user = new User(tnom.getText(),tprenom.getText(),tusername.getText(),temail.getText(),tmdp.getText(),Integer.parseInt(tnum_tel.getText()),Integer.parseInt(tcin.getText()));
                 if(ServiceUser.getService().addUser(user)){
                     Dialog.show("success", "compte ajouté avec succés", "OK",null);
                 }else{
                 Dialog.show("error", "ajout a échoué", "OK",null);
                 }
-            }
+            }else{
+                Dialog.show("error", "Vous devez saisir deux mots de passe identiques", "OK",null);   
+                }
+            } 
         }));
-        addAll(lnom,tnom,lprenom,tprenom,lusername,tusername,lemail,temail,lmdp,tmdp,lnum_tel,tnum_tel,lcin,tcin,addU);
+        addAll(lnom,tnom,lprenom,tprenom,lusername,tusername,lemail,temail,lmdp,tmdp,lmdp2,tmdp2,lnum_tel,tnum_tel,lcin,tcin,addU);
         Label login = new Label("Vous avez déjà un compte ?");
         login.getUnselectedStyle().setUnderline(true);
     
