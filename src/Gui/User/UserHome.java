@@ -15,16 +15,16 @@ import com.codename1.ui.layouts.BoxLayout;
  * @author hanin
  */
 public class UserHome extends Form{
-    public UserHome(int id){
+    public UserHome(int id,Form prev){
         setTitle("Home Page");
         setLayout(BoxLayout.yCenter());
-        Form edit=new EditProfile(1);
+        Form edit=new EditProfile(1,prev);
         add(edit);
         //Form F1=new ChangePassword();
         Command modifPass = new Command("Modifier mot de passe") {
         @Override
         public void actionPerformed(ActionEvent evt) {
-         new EditPassword(1).show();
+         new EditPassword(1,prev).show();
     }
 };
         getToolbar().addCommandToSideMenu(modifPass);

@@ -10,6 +10,8 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 
 /**
@@ -17,7 +19,7 @@ import com.codename1.ui.layouts.BoxLayout;
  * @author MSI
  */
 public class EditProfile extends Form{
-    public EditProfile(int id){
+    public EditProfile(int id,Form previous){
         User user = ServiceUser.getService().getUser(id);
         setTitle("Mon profile");
         setLayout(BoxLayout.yCenter());
@@ -42,7 +44,16 @@ public class EditProfile extends Form{
         tcin.setText(String.valueOf(user.getCin()));
         tcin.setConstraint(TextField.NUMERIC);
         Button modif = new Button("Modifier");
-        modif.addActionListener((evt) -> {
+        modif.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                User user = new User(id,tnom.getText(),tprenom.getText(),tusername.getText(),temail.getText(),Integer.parseInt(tnum_tel.getText()),Integer.parseInt(tcin.getText()));
+                if(ServiceUser.getInstance().modifUser(user)){
+
+                    DisplayUser refresh = new DisplayUser(previous);
+                    refresh.show();
+                }
+            }
         });
         addAll(lnom,tnom,lprenom,tprenom,lusername,tusername,lemail,temail,lnum_tel,tnum_tel,lcin,tcin,modif);
     }

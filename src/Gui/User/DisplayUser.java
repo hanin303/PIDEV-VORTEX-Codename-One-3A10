@@ -71,7 +71,7 @@ public class DisplayUser extends Form{
             Button supp = new Button("Supprimer");
             Button modif = new Button("Modifer");
             modif.addActionListener((evt) -> {
-                new EditProfile(user.getId_user()).show();
+                new EditProfile(user.getId_user(),previous).show();
             });
             supp.addActionListener((evt) -> {
                 ServiceUser.getInstance().deleteUser(user.getId_user());

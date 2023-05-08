@@ -61,6 +61,32 @@ public class ServiceUser {
 
 
     }
+    public boolean modifUser(User u){
+        String url= Statics.BASE_URL+"api/edit";
+        request.addArgument("id",String.valueOf(u.getId_user()));
+        request.addArgument("nom", u.getNom());
+        request.addArgument("prenom", u.getPrenom());
+        request.addArgument("username", u.getUsername());
+        request.addArgument("email", u.getEmail());
+        request.addArgument("mdp", u.getMdp());
+        request.addArgument("num_tel", String.valueOf(u.getNum_tel()));
+        request.addArgument("cin", String.valueOf(u.getCin()));
+        request.setUrl(url);
+
+
+        request.setPost(true);
+        request.addResponseListener(new ActionListener<NetworkEvent>(){
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                JSONParser jsonParser;
+                jsonParser = new JSONParser();
+                resultOK = request.getResponseCode()==200;
+                request.removeResponseCodeListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return resultOK;
+    }
     public boolean addUser(User u){
         String url= Statics.BASE_URL+"api/add";
         request.addArgument("nom", u.getNom());

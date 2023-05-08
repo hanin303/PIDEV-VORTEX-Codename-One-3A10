@@ -19,12 +19,12 @@ import com.codename1.ui.layouts.FlowLayout;
  * @author MSI
  */
 public class EditPassword extends Form{
-    public EditPassword(int id){
+    public EditPassword(int id,Form prev){
         setTitle("Modifier mot de passe");
         Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
         back.addActionListener((evt) -> {
-        new UserHome(id).show();
+        new UserHome(id,prev).show();
         });
         Container container = new Container(new FlowLayout(Component.LEFT));
         container.add(back);
