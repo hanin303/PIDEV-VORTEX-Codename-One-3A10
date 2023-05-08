@@ -27,6 +27,8 @@ public class DisplayUser extends Form{
         setTitle("Liste des utilisateurs");
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         ArrayList<User> users = ServiceUser.getInstance().getAllUsers();
+        User usr = ServiceUser.getService().getUser(5);
+        System.out.println("user"+usr);
         System.out.println(users);
 
         for( User user: users) {
