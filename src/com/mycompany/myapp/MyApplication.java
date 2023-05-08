@@ -1,7 +1,9 @@
 package com.mycompany.myapp;
 
 
+import Gui.Reservation.ReservationHome;
 import Gui.Station.StationHome;
+import Gui.Ticket.TicketHome;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
@@ -47,8 +49,9 @@ public class MyApplication {
             current.show();
             return;
         }
-       new StationHome().show();
-       
+       //new StationHome().show();
+       new ReservationHome().show();
+       //new TicketHome().show();
     }
 
     public void stop() {
