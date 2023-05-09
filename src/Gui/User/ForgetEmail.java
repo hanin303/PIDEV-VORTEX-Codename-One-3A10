@@ -49,7 +49,6 @@ public class ForgetEmail extends Form{
             code= ServiceUser.getInstance().emailPass(temail.getText().toString());
 
             float id = Float.parseFloat(code.get(1).toString());
-            System.out.printf("code1 "+id);
             ForgetCode forgetCode = new ForgetCode(code.get(0),(int)id,prev);
             forgetCode.show();
         });

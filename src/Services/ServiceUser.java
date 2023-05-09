@@ -255,7 +255,6 @@ public class ServiceUser {
                 String jsonText =new String(request.getResponseData());
                 try {
                     Map<String,Object> obj = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-                    System.out.printf("test23 "+obj.get("code").toString());
                     code.add(obj.get("code").toString());
                     code.add(obj.get("id").toString());
                 } catch (IOException e) {
