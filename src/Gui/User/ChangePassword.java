@@ -4,9 +4,12 @@
  */
 package Gui.User;
 
+import Entity.User;
+import Services.ServiceUser;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -19,7 +22,7 @@ import com.codename1.ui.layouts.FlowLayout;
  * @author MSI
  */
 public class ChangePassword extends Form{
-    public ChangePassword(Form prev){
+    public ChangePassword(int id,Form prev){
         setTitle("Récupération de mot de passe");
         Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
@@ -39,6 +42,10 @@ public class ChangePassword extends Form{
         tmdp2.setConstraint(TextField.PASSWORD);
         Button modif = new Button("Modifier");
         modif.addActionListener((evt) -> {
+            if(ServiceUser.getService().modifPass(id,tmdp1.getText())){
+                Dialog.show("Success", "Mot de passe modifié avec succés", "OK", null);
+                new Login(prev).show();
+            }    
         });
         addAll(lmdp1,tmdp1,lmdp2,tmdp2,modif);
     }

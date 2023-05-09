@@ -6,6 +6,7 @@
 package Services;
 
 import Entity.User;
+import Entity.Role;
 import Utils.Statics;
 import com.codename1.io.*;
 import com.codename1.ui.events.ActionListener;
@@ -25,6 +26,7 @@ public class ServiceUser {
     private static ServiceUser service;
     private boolean resultOK;
     private ArrayList<User> users;
+    private ArrayList<Role> roles;
 
     private ServiceUser() {
         request = new ConnectionRequest();
@@ -89,6 +91,24 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(request);
         return resultOK;
     }
+    
+    public boolean modifPass(int id,String mdp){
+        String url= Statics.BASE_URL+"api/change?id="+id+"&mdp="+mdp;
+        request.setUrl(url);
+        request.setPost(true);
+        request.setCheckSSLCertificates(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>(){
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                JSONParser jsonParser;
+                jsonParser = new JSONParser();
+                resultOK = request.getResponseCode()==200;
+                request.removeResponseCodeListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return resultOK;
+    }
     public User login(String username,String password){
         String url= Statics.BASE_URL+"api/login";
         request.setContentType(" application/json");
@@ -124,6 +144,37 @@ public class ServiceUser {
         request.addArgument("mdp", u.getMdp());
         request.addArgument("num_tel", String.valueOf(u.getNum_tel()));
         request.addArgument("cin", String.valueOf(u.getCin()));
+        request.setUrl(url);
+
+
+        request.setPost(true);
+        request.setCheckSSLCertificates(false);
+
+//        request.setUseNativeHttp(true);
+        request.addResponseListener(new ActionListener<NetworkEvent>(){
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                JSONParser jsonParser;
+                jsonParser = new JSONParser();
+             resultOK = request.getResponseCode()==200;
+            request.removeResponseCodeListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+       // NetworkManager.getInstance().setDefaultProtocol("http");
+
+        return resultOK;
+    }
+    public boolean addAdmin(User u){
+        String url= Statics.BASE_URL+"api/addAdmin";
+        request.addArgument("nom", u.getNom());
+        request.addArgument("prenom", u.getPrenom());
+        request.addArgument("username", u.getUsername());
+        request.addArgument("email", u.getEmail());
+        request.addArgument("mdp", u.getMdp());
+        request.addArgument("num_tel", String.valueOf(u.getNum_tel()));
+        request.addArgument("cin", String.valueOf(u.getCin()));
+        request.addArgument("id_role", String.valueOf(u.getRole().getId_role()));
         request.setUrl(url);
 
 
@@ -234,6 +285,48 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(request);
         return users;
     }
+    public ArrayList<Role> getAllRoles(){
+        String url= Statics.BASE_URL+"api/showRole";
+        request.setPost(true);
+        request.setUrl(url);
+        request.setCheckSSLCertificates(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent networkEvent) {
+                System.out.println("resp "+new String(request.getResponseData()));
+                roles = parseRoles(new String(request.getResponseData()));
+                System.out.println("roles"+roles.toString());
+                request.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return roles;
+    }
+    public ArrayList<Role> parseRoles(String jsonText) {
+        try {
+            roles = new ArrayList<>();
+            JSONParser j = new JSONParser();
+
+            Map<String,Object>mapUsers = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+
+            List<Map<String,Object>> listOfMaps =  (List<Map<String,Object>>) mapUsers.get("root");
+            System.out.println("jsontxt"+jsonText.toString());
+            for (Map<String, Object> obj : listOfMaps){
+                Role r = new Role();
+                float id = Float.parseFloat(obj.get("id").toString());
+                r.setId_role((int)id);
+                r.setNom(obj.get("nom").toString());
+                
+              
+                roles.add(r);
+            }
+
+
+        } catch (IOException exp){
+            System.out.println("ioexp"+exp.getMessage());
+        }
+        return roles;
+    }
     public User getUser(int id){
         String url= Statics.BASE_URL+"api/show?id="+id;
         request.setPost(true);
@@ -251,6 +344,40 @@ public class ServiceUser {
         });
         NetworkManager.getInstance().addToQueueAndWait(request);
         return user[0];
+    }
+    public Role getRole(int id){
+        String url= Statics.BASE_URL+"api/showR?id="+id;
+        request.setPost(true);
+        request.setUrl(url);
+        request.setCheckSSLCertificates(false);
+        final Role[] role = new Role[1];
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent networkEvent) {
+              //  System.out.println("resp "+new String(request.getResponseData()));
+                role[0] = parseRole(new String(request.getResponseData()));
+               // System.out.println("users"+users.toString());
+                request.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return role[0];
+    }
+     private Role parseRole(String jsonText){
+        Role r= new Role();
+        try {
+            JSONParser j = new JSONParser();
+            Map<String,Object> obj = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            float id = Float.parseFloat(obj.get("id").toString());
+                        
+            r.setId_role((int)id);
+            r.setNom(obj.get("nom").toString());
+
+
+        } catch (IOException exp){
+            System.out.println("ioexp"+exp.getMessage());
+        }
+        return r;
     }
 
     public ArrayList<String> emailPass(String email) {

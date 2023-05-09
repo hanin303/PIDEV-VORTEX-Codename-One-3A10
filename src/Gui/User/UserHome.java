@@ -40,9 +40,16 @@ public class UserHome extends Form{
          new Login(previous).show();
     }
 };
+         Command ajout = new Command("Ajouter utilisateur") {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+         new AddAdmin(u,previous).show();
+    }
+};
         if(u.getId_role()==1){
         
         getToolbar().addCommandToSideMenu(modifPass);
+        getToolbar().addCommandToSideMenu(ajout);
         getToolbar().addCommandToSideMenu(users);
         getToolbar().addCommandToSideMenu(log);
     }else if(u.getId_role()==4){

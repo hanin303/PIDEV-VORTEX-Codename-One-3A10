@@ -4,22 +4,30 @@
  */
 package Gui.User;
 
+import Entity.Role;
 import Entity.User;
 import Services.ServiceUser;
 import com.codename1.ui.Button;
+import com.codename1.ui.ComboBox;
+import com.codename1.ui.Component;
+import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import java.util.ArrayList;
 
 /**
  *
  * @author MSI
  */
 public class AddAdmin extends Form{
+    private Role r;
     private boolean isValidEmail(String email) {
     String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     int atIndex = email.indexOf('@');
@@ -28,8 +36,16 @@ public class AddAdmin extends Form{
     return (atIndex > 0 && dotIndex > atIndex);
     
 }
-    public AddAdmin(Form prev) {
+    public AddAdmin(User u,Form prev) {
         setTitle("Inscription");
+        Button back = new Button();
+        back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
+        back.addActionListener((evt) -> {
+        new UserHome(u,prev).show();
+        });
+        Container container = new Container(new FlowLayout(Component.LEFT));
+        container.add(back);
+        addComponent(container);
         setLayout(BoxLayout.yCenter());
         Label lnom = new Label("nom:");
         TextField tnom = new TextField("","votre nom");
@@ -53,6 +69,27 @@ public class AddAdmin extends Form{
         Label lcin = new Label("Numéro de carte d'identité:");
         TextField tcin = new TextField("","Votre numéro de carte d'identité");
         tcin.setConstraint(TextField.NUMERIC);
+        ComboBox<String> combo = new ComboBox<>();
+        ArrayList<Role> roles = ServiceUser.getService().getAllRoles();
+
+// Step 3: Iterate over the roles and extract role names
+        for (Role role : roles) {
+          String idrole = String.valueOf(role.getId_role());
+
+    // Step 4: Add the role name to the ComboBox
+         combo.addItem(idrole);
+         
+     }
+        /*ComboBox<String> role = new ComboBox<>();
+        role.addItem("1");
+        role.addItem("2");
+        role.addItem("3");*/
+        combo.addActionListener(evt -> {
+        String selectedOption = combo.getSelectedItem();
+        //System.out.println("Selected option: " + selectedOption);
+        Role selectedRole= ServiceUser.getService().getRole(Integer.parseInt(selectedOption));
+        this.r=selectedRole;
+        });
         
         Button addU = new Button("Ajouter");
         addU.addActionListener((new ActionListener() {
@@ -67,9 +104,10 @@ public class AddAdmin extends Form{
                         if(tcin.getText().length()<=8){
                             if(isValidEmail(testemail)){
                                 if(tmdp.getText().length()<=8){
-                User user = new User(tnom.getText(),tprenom.getText(),tusername.getText(),temail.getText(),tmdp.getText(),Integer.parseInt(tnum_tel.getText()),Integer.parseInt(tcin.getText()));
-                if(ServiceUser.getService().addUser(user)){
+                User user = new User(tnom.getText(),tprenom.getText(),tusername.getText(),temail.getText(),tmdp.getText(),Integer.parseInt(tnum_tel.getText()),Integer.parseInt(tcin.getText()),r);
+                if(ServiceUser.getService().addAdmin(user)){
                     Dialog.show("success", "compte ajouté avec succés", "OK",null);
+                    new UserHome(u,prev).show();
                 }else{
                 Dialog.show("error", "ajout a échoué", "OK",null);
                 }
@@ -87,6 +125,7 @@ public class AddAdmin extends Form{
             } }
         }));
         addAll(lnom,tnom,lprenom,tprenom,lusername,tusername,lemail,temail,lmdp,tmdp,lmdp2,tmdp2,lnum_tel,tnum_tel,lcin,tcin);
+        addComponent( combo);
         add(addU);
        
 }

@@ -115,7 +115,18 @@ public class User {
         this.cin=cin; 
         this.role=role;
     }
-
+    
+     public User( String nom, String prenom, String username,String email, String mdp, int num_tel, int cin,Role role){
+        this.nom=nom;
+        this.prenom=prenom;
+        this.username=username;
+        this.email=email;
+        this.mdp=mdp;
+        this.num_tel=num_tel;
+        this.cin=cin; 
+        this.role=role;
+    }
+    
     public int getId_user() {
         return id_user;
     }
