@@ -4,6 +4,7 @@
  */
 package Gui.User;
 
+import Services.ServiceUser;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
@@ -19,12 +20,13 @@ import com.codename1.ui.layouts.FlowLayout;
  * @author MSI
  */
 public class ForgetCode extends Form{
-    public ForgetCode(){
+    public ForgetCode(String code,int id,Form prev){
         setTitle("Récupération de mot de passe");
         Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
         back.addActionListener((evt) -> {
-        new Login().show();
+
+        new Login(prev).show();
         });
 
         Container container = new Container(new FlowLayout(Component.LEFT));
@@ -35,6 +37,14 @@ public class ForgetCode extends Form{
         TextField tcode = new TextField("");
         Button send = new Button("Envoyer");
         send.addActionListener((evt) -> {
+            if (tcode.getText().toString().equals(code)){
+                System.out.println("good");
+                EditPassword editPassword = new EditPassword(id,prev);
+                editPassword.show();
+            }
+            else
+                System.out.println("bad");
+
         });
         addAll(lcode,tcode,send);
 

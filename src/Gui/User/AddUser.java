@@ -75,7 +75,7 @@ public class AddUser extends Form{
     public String getImagePath() {
         return imagePath;
     }
-    public AddUser() {
+    public AddUser(Form prev) {
         setTitle("Inscription");
         setLayout(BoxLayout.yCenter());
         Label lnom = new Label("nom:");
@@ -144,7 +144,7 @@ public class AddUser extends Form{
         login.addPointerPressedListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-            new Login().show();
+            new Login(prev).show();
            }
           });
     

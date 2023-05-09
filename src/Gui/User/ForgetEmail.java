@@ -4,6 +4,7 @@
  */
 package Gui.User;
 
+import Services.ServiceUser;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
@@ -17,19 +18,21 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author MSI
  */
 public class ForgetEmail extends Form{
-    public ForgetEmail(){
+    public ForgetEmail(Form prev){
         
         setTitle("Récupération de mot de passe");
          // Create the back button with a back icon
         Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
         back.addActionListener((evt) -> {
-        new Login().show();
+        new Login(prev).show();
         });
 
         Container container = new Container(new FlowLayout(Component.LEFT));
@@ -42,6 +45,13 @@ public class ForgetEmail extends Form{
         TextField temail= new TextField("");
         Button send = new Button("Envoyer");
         send.addActionListener((evt) -> {
+            ArrayList<String> code ;
+            code= ServiceUser.getInstance().emailPass(temail.getText().toString());
+
+            float id = Float.parseFloat(code.get(1).toString());
+            System.out.printf("code1 "+id);
+            ForgetCode forgetCode = new ForgetCode(code.get(0),(int)id,prev);
+            forgetCode.show();
         });
         addAll(lemail,temail,send);
        

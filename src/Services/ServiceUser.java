@@ -87,6 +87,31 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(request);
         return resultOK;
     }
+    public User login(String username,String password){
+        String url= Statics.BASE_URL+"api/login";
+        request.setContentType(" application/json");
+        request.setPost(true);
+        String jsonBody = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+        request.setRequestBody(jsonBody);
+        request.setUrl(url);
+
+        final User[] user = new User[1];
+        request.addResponseListener(new ActionListener<NetworkEvent>(){
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                JSONParser jsonParser;
+                jsonParser = new JSONParser();
+                resultOK = request.getResponseCode()==200; request.removeResponseCodeListener(this);
+                System.out.println("respl "+new String(request.getResponseData()));
+                user[0] = parseUser(new String(request.getResponseData()));
+                System.out.println("usersl "+user[0]);
+                request.removeResponseListener(this);
+
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return user[0];
+    }
     public boolean addUser(User u){
         String url= Statics.BASE_URL+"api/add";
         request.addArgument("nom", u.getNom());
@@ -216,4 +241,31 @@ public class ServiceUser {
         return user[0];
     }
 
+    public ArrayList<String> emailPass(String email) {
+
+        String url= Statics.BASE_URL+"api/email";
+        request.addArgument("email",email);
+        ArrayList<String> code = new ArrayList<>();
+        request.setUrl(url);
+        request.setPost(true);
+        request.addResponseListener(new ActionListener<NetworkEvent>(){
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                JSONParser j = new JSONParser();
+                String jsonText =new String(request.getResponseData());
+                try {
+                    Map<String,Object> obj = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+                    System.out.printf("test23 "+obj.get("code").toString());
+                    code.add(obj.get("code").toString());
+                    code.add(obj.get("id").toString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                request.removeResponseCodeListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        System.out.println("code array string "+code);
+        return code;
+    }
 }

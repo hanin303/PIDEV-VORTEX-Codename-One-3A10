@@ -19,12 +19,12 @@ import com.codename1.ui.layouts.FlowLayout;
  * @author MSI
  */
 public class ChangePassword extends Form{
-    public ChangePassword(){
+    public ChangePassword(Form prev){
         setTitle("Récupération de mot de passe");
         Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
         back.addActionListener((evt) -> {
-        new Login().show();
+        new Login(prev).show();
         });
 
         Container container = new Container(new FlowLayout(Component.LEFT));

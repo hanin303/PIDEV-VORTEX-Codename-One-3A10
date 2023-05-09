@@ -4,6 +4,7 @@
  */
 package Gui.User;
 
+import Services.ServiceUser;
 import com.codename1.components.SpanButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
@@ -20,7 +21,7 @@ import com.codename1.ui.layouts.BoxLayout;
  * @author MSI
  */
 public class Login extends Form {
-    public Login(){
+    public Login(Form prev){
         setLayout(BoxLayout.yCenter());        
         setTitle("Se connecter");
         Label lusername = new Label("Username:");
@@ -31,7 +32,7 @@ public class Login extends Form {
         tmdp.setConstraint(TextField.PASSWORD);
         Button con = new Button("connecter");
         con.addActionListener((evt) -> {
-
+            ServiceUser.getInstance().login(tusername.getText().toString(),tmdp.getText().toString());
         });
         addAll(lusername,tusername,lmdp,tmdp,con);
         Label addU = new Label("Créer votre compte");
@@ -41,7 +42,7 @@ public class Login extends Form {
         addU.addPointerPressedListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-            new AddUser().show();
+            new AddUser(prev).show();
            }
           });
         addComponent(addU);
@@ -52,7 +53,7 @@ public class Login extends Form {
         forget.addPointerPressedListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-            new ForgetEmail().show();
+            new ForgetEmail(prev).show();
            }
           });
         // Add the label to the MainForm
