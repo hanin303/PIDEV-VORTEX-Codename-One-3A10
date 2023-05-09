@@ -4,6 +4,7 @@
  */
 package Gui.User;
 
+import Entity.User;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
@@ -19,12 +20,12 @@ import com.codename1.ui.layouts.FlowLayout;
  * @author MSI
  */
 public class EditPassword extends Form{
-    public EditPassword(int id,Form prev){
+    public EditPassword(User u,Form prev){
         setTitle("Modifier mot de passe");
         Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
         back.addActionListener((evt) -> {
-        new UserHome(id,prev).show();
+        new UserHome(u,prev).show();
         });
         Container container = new Container(new FlowLayout(Component.LEFT));
         container.add(back);

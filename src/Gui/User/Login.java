@@ -4,11 +4,13 @@
  */
 package Gui.User;
 
+import Entity.User;
 import Services.ServiceUser;
 import com.codename1.components.SpanButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -33,6 +35,9 @@ public class Login extends Form {
         Button con = new Button("connecter");
         con.addActionListener((evt) -> {
             ServiceUser.getInstance().login(tusername.getText().toString(),tmdp.getText().toString());
+            User u1 = ServiceUser.getInstance().login(tusername.getText().toString(), tmdp.getText().toString());
+            Dialog.show("Success", "Connecté avec succés", "OK", null);
+            new UserHome(u1,prev).show();
         });
         addAll(lusername,tusername,lmdp,tmdp,con);
         Label addU = new Label("Créer votre compte");

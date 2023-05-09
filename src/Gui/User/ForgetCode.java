@@ -39,8 +39,8 @@ public class ForgetCode extends Form{
         send.addActionListener((evt) -> {
             if (tcode.getText().toString().equals(code)){
                 System.out.println("good");
-                EditPassword editPassword = new EditPassword(id,prev);
-                editPassword.show();
+                //EditPassword editPassword = new EditPassword(id,prev);
+               // editPassword.show();
             }
             else
                 System.out.println("bad");

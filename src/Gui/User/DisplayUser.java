@@ -10,12 +10,15 @@ import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import java.util.ArrayList;
@@ -25,8 +28,16 @@ import java.util.ArrayList;
  * @author MSI
  */
 public class DisplayUser extends Form{
-    public DisplayUser(Form previous){
+    public DisplayUser(User u,Form previous){
         setTitle("Liste des utilisateurs");
+        Button back = new Button();
+        back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
+        back.addActionListener((evt) -> {
+            new UserHome(u,previous).show();
+        });
+        Container container = new Container(new FlowLayout(Component.LEFT));
+        container.add(back);
+        addComponent(container);
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         ArrayList<User> users = ServiceUser.getInstance().getAllUsers();
         //User usr = ServiceUser.getService().getUser(5);
@@ -41,13 +52,13 @@ public class DisplayUser extends Form{
             card.getStyle().setMargin(Component.BOTTOM, 2);
             card.getStyle().setBgColor(0xFFFFFF);
             System.out.println(user.getId_user());
-            Label id = new Label("ID: " + user.getId_user());
-            Label nom = new Label("Nom: " + user.getNom());
-            Label prenom = new Label("Prénom: " + user.getPrenom());
-            Label username = new Label("Username: " + user.getUsername());
-            Label email = new Label("E-mail" + user.getEmail());
-            Label num_tel = new Label("Numéro téléphone" + user.getNum_tel());
-            Label cin = new Label("CIN" + user.getCin());
+            Label id = new Label("ID : " + user.getId_user());
+            Label nom = new Label("Nom : " + user.getNom());
+            Label prenom = new Label("Prénom : " + user.getPrenom());
+            Label username = new Label("Username : " + user.getUsername());
+            Label email = new Label("E-mail : " + user.getEmail());
+            Label num_tel = new Label("Numéro téléphone : " + user.getNum_tel());
+            Label cin = new Label("CIN : " + user.getCin());
           //  Label role = new Label("Nom" + user.getRole().getNom());
             id.getStyle().setFgColor(0x000000);
             nom.getStyle().setFgColor(0x000000);
@@ -71,11 +82,12 @@ public class DisplayUser extends Form{
             Button supp = new Button("Supprimer");
             Button modif = new Button("Modifer");
             modif.addActionListener((evt) -> {
-                new EditProfile(user.getId_user(),previous).show();
+            new EditProfile(u,user.getId_user(),previous).show();
             });
             supp.addActionListener((evt) -> {
                 ServiceUser.getInstance().deleteUser(user.getId_user());
-                DisplayUser refresh = new DisplayUser(previous);
+                Dialog.show("Success", "utilisateur supprimé avec succés", "OK", null);
+                DisplayUser refresh = new DisplayUser(u,previous);
                 refresh.show();
             });
             //card.add(BorderLayout.CENTER, supp);

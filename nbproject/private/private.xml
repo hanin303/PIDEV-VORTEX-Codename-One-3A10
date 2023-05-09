@@ -3,6 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/com/mycompany/myapp/MyApplication.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Gui/User/AddUser.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Gui/User/ChangePassword.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Gui/Role/DisplayRole.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/test/Services/ServiceUserTest.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Gui/User/ForgetCode.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Entity/User.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Utils/Statics.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Gui/User/ForgetEmail.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Gui/User/DisplayUser.java</file>
+            <file>file:/C:/PIDEV-VORTEX-Codename-One-3A10/src/Services/ServiceUser.java</file>
+        </group>
     </open-files>
 </project-private>

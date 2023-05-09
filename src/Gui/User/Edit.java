@@ -19,8 +19,8 @@ import com.codename1.ui.layouts.BoxLayout;
  *
  * @author MSI
  */
-public class EditProfile extends Form{
-    public EditProfile(User u,int id,Form previous){
+public class Edit extends Form{
+    public Edit(User u,int id,Form previous){
         User user = ServiceUser.getService().getUser(id);
         setTitle("Mon profile");
         setLayout(BoxLayout.yCenter());
@@ -51,11 +51,16 @@ public class EditProfile extends Form{
                 User user = new User(id,tnom.getText(),tprenom.getText(),tusername.getText(),temail.getText(),Integer.parseInt(tnum_tel.getText()),Integer.parseInt(tcin.getText()));
                 if(ServiceUser.getInstance().modifUser(user)){
                     Dialog.show("Success", "utilisateur modifié avec succés", "OK", null);
-                    DisplayUser refresh = new DisplayUser(u,previous);
+                    UserHome refresh = new UserHome(u,previous);
                     refresh.show();
                 }
+    
             }
         });
         addAll(lnom,tnom,lprenom,tprenom,lusername,tusername,lemail,temail,lnum_tel,tnum_tel,lcin,tcin,modif);
+    
     }
+   
+
 }
+

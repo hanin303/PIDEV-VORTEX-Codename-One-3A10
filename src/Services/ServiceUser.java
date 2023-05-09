@@ -44,10 +44,11 @@ public class ServiceUser {
         return instance;
     }
     public boolean deleteUser(int id){
-        String url= Statics.BASE_URL+"api/delete";
-        request.addArgument("id",String.valueOf(id));
+        String url= Statics.BASE_URL+"api/delete?id="+id;
+        //request.addArgument("id",String.valueOf(id));
         request.setUrl(url);
         request.setPost(true);
+        request.setCheckSSLCertificates(false);
 
         request.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override
@@ -62,19 +63,20 @@ public class ServiceUser {
 
     }
     public boolean modifUser(User u){
-        String url= Statics.BASE_URL+"api/edit";
-        request.addArgument("id",String.valueOf(u.getId_user()));
+        String url= Statics.BASE_URL+"api/edit?id="+String.valueOf(u.getId_user())+"&nom="+u.getNom()+"&prenom="+u.getPrenom()+"&username="+u.getUsername()+"&email="+u.getEmail()+"&num_tel="+u.getNum_tel()+"&cin="+u.getCin();
+        /*request.addArgument("id",String.valueOf(u.getId_user()));
         request.addArgument("nom", u.getNom());
         request.addArgument("prenom", u.getPrenom());
         request.addArgument("username", u.getUsername());
         request.addArgument("email", u.getEmail());
         request.addArgument("mdp", u.getMdp());
         request.addArgument("num_tel", String.valueOf(u.getNum_tel()));
-        request.addArgument("cin", String.valueOf(u.getCin()));
+        request.addArgument("cin", String.valueOf(u.getCin()));*/
         request.setUrl(url);
 
 
         request.setPost(true);
+        request.setCheckSSLCertificates(false);
         request.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override
             public void actionPerformed(NetworkEvent evt) {
@@ -94,6 +96,7 @@ public class ServiceUser {
         String jsonBody = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
         request.setRequestBody(jsonBody);
         request.setUrl(url);
+        request.setCheckSSLCertificates(false);
 
         final User[] user = new User[1];
         request.addResponseListener(new ActionListener<NetworkEvent>(){
@@ -125,6 +128,9 @@ public class ServiceUser {
 
 
         request.setPost(true);
+        request.setCheckSSLCertificates(false);
+
+//        request.setUseNativeHttp(true);
         request.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override
             public void actionPerformed(NetworkEvent evt) {
@@ -135,6 +141,8 @@ public class ServiceUser {
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(request);
+       // NetworkManager.getInstance().setDefaultProtocol("http");
+
         return resultOK;
     }
     private User parseUser(String jsonText){
@@ -161,6 +169,7 @@ public class ServiceUser {
             u.setMdp(obj.get("password").toString());
             u.setPrenom(obj.get("prenom").toString());
             u.setNom(obj.get("nom").toString());
+            u.setEmail(obj.get("email").toString());
 
 
         } catch (IOException exp){
@@ -198,6 +207,7 @@ public class ServiceUser {
                 u.setMdp(obj.get("password").toString());
                 u.setPrenom(obj.get("prenom").toString());
                 u.setNom(obj.get("nom").toString());
+                u.setEmail(obj.get("email").toString());
                 users.add(u);
             }
 
@@ -211,6 +221,7 @@ public class ServiceUser {
         String url= Statics.BASE_URL+"api/showAll";
         request.setPost(true);
         request.setUrl(url);
+        request.setCheckSSLCertificates(false);
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent networkEvent) {
@@ -227,6 +238,7 @@ public class ServiceUser {
         String url= Statics.BASE_URL+"api/show?id="+id;
         request.setPost(true);
         request.setUrl(url);
+        request.setCheckSSLCertificates(false);
         final User[] user = new User[1];
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -248,6 +260,7 @@ public class ServiceUser {
         ArrayList<String> code = new ArrayList<>();
         request.setUrl(url);
         request.setPost(true);
+        request.setCheckSSLCertificates(false);
         request.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override
             public void actionPerformed(NetworkEvent evt) {

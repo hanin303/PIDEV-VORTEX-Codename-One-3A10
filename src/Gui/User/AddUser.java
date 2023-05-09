@@ -118,6 +118,7 @@ public class AddUser extends Form{
                 User user = new User(tnom.getText(),tprenom.getText(),tusername.getText(),temail.getText(),tmdp.getText(),Integer.parseInt(tnum_tel.getText()),Integer.parseInt(tcin.getText()));
                 if(ServiceUser.getService().addUser(user)){
                     Dialog.show("success", "compte ajouté avec succés", "OK",null);
+                    new Login(prev).show();
                 }else{
                 Dialog.show("error", "ajout a échoué", "OK",null);
                 }
