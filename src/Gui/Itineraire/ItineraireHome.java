@@ -5,10 +5,29 @@
  */
 package Gui.Itineraire;
 
-/**
- *
- * @author hanin
- */
-public class ItineraireHome {
+import com.codename1.ui.Button;
+import com.codename1.ui.Form;
+import com.codename1.ui.Label;
+import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.util.Resources;
+
+
+public class ItineraireHome extends Form  {
+    public ItineraireHome(){
+        setTitle("Home");
+        setLayout(BoxLayout.y());
+        
+        add(new Label("Choose an option"));
+        Button btnAddItineraire = new Button("Add Itineraire");
+        Button btnListItineraires = new Button("List Itineraires");
+        Resources res = null;
+        btnAddItineraire.addActionListener(e-> new AjoutItineraireForm(res).show());
+        //btnListTasks.addActionListener(e-> new ListTasksForm(this).show());
+        btnListItineraires.addActionListener(e-> new AffichageItineraire(this).show());
+        add(btnAddItineraire);
+        add(btnListItineraires);
+
+
+    }
     
 }
