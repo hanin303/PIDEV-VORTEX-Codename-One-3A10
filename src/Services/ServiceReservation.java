@@ -15,6 +15,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public class ServiceReservation {
                 Reservation r = new Reservation();
                 float id = Float.parseFloat(obj.get("id").toString());
                 r.setId_reservation((int) id);
-                r.setDate_reservation((String)obj.get("date_reservation"));
+                //r.setDate_reservation((Date)obj.get("date_reservation"));
                 r.setHeure_depart((String)obj.get("heure_depart"));
                 r.setHeure_arrive((String)obj.get("heure_arrive"));
                 r.setStatus((String)obj.get("status"));
@@ -82,5 +83,55 @@ public class ServiceReservation {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return reservations;
     }
+    
+        public void AjouterReservation(Reservation r){
+        String url = Statics.BASE_URL+"reservation/addReservationJSON/new?date_reservation="+r.getDate_reservation()+
+                "&heure_depart=" + r.getHeure_depart()+ "&heure_arrive=" + r.getHeure_arrive()+ "&type_ticket=" + r.getType_ticket()
+                + "&status=" + r.getStatus()+ "&id_client=" + r.getId_client()+ "&id_it=" + r.getId_it()+ "&id_moy=" + r.getId_moy();
+        req.setUrl(url);
+        req.addResponseListener((e)->{
+        String str = new String(req.getResponseData());
+            System.out.println("data=="+str);});
+        NetworkManager.getInstance().addToQueueAndWait(req); 
+    }
+    
+    public boolean suppReservation(Reservation r)
+    {
+
+        String url = Statics.BASE_URL + "reservation/deleteReservationJSON/" +r.getId_reservation();
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+             @Override
+             public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);             }
+         });
+          NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+ public void modifierReservation(int id_reservation, Date date_reservation , String heure_depart , String heure_arrive , String status,String type_ticket,String id_client,String id_moy,String id_it) {
+    String url = Statics.BASE_URL + "reservation/updateReservationJSON/"+id_reservation+"?date_reservation="+date_reservation
+            +"&heure_depart="+heure_depart+"&heure_arrive="+heure_arrive+"&status="+status+"&type_ticket="+type_ticket+"&id_client="+id_client 
+             +"&id_moy="+id_moy+"&id_it="+id_it;
+    
+    ConnectionRequest req = new ConnectionRequest();
+    req.setUrl(url);
+    req.setHttpMethod("PUT");
+    req.addResponseListener((NetworkEvent evt) -> {
+        if (req.getResponseCode() == 200) {
+            JSONParser parser = new JSONParser();
+            try {
+                Map<String, Object> response = parser.parseJSON(new CharArrayReader(new String(req.getResponseData()).toCharArray()));
+                System.out.println(response);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    });
+    NetworkManager.getInstance().addToQueueAndWait(req);
+}
+    
     
 }

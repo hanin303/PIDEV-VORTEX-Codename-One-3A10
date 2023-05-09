@@ -1,9 +1,16 @@
 package com.mycompany.myapp;
 
 
+<<<<<<< HEAD
 
 
 import Gui.Itineraire.ItineraireHome;
+=======
+import Gui.Ligne.ListLigne;
+import Gui.Reservation.ReservationHome;
+import Gui.Station.StationHome;
+import Gui.Ticket.TicketHome;
+>>>>>>> 31b776eadf78bd2d7c11ebf39b1db83eb2fc16db
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
@@ -49,8 +56,15 @@ public class MyApplication {
             current.show();
             return;
         }
+<<<<<<< HEAD
        new ItineraireHome().show();
        
+=======
+       //new StationHome().show();
+      // new ReservationHome().show();
+       //new TicketHome().show();
+         new ListLigne(current).show();
+>>>>>>> 31b776eadf78bd2d7c11ebf39b1db83eb2fc16db
     }
 
     public void stop() {

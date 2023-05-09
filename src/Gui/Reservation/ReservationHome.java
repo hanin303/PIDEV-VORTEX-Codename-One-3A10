@@ -9,6 +9,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.util.Resources;
 
 /**
  *
@@ -24,7 +25,8 @@ public class ReservationHome extends Form {
         add(new Label("Choose an option"));
         Button btnAddReservation = new Button("Add Reservation");
         Button btnListReservations = new Button("List Reservations");
-        btnAddReservation.addActionListener(e-> new AddReservationForm(this).show());
+        Resources  res = null;
+        btnAddReservation.addActionListener(e-> new AddReservationForm(res).show());
         //btnListTasks.addActionListener(e-> new ListTasksForm(this).show());
         btnListReservations.addActionListener(e-> new ListReservations(this).show());
         add(btnAddReservation);
