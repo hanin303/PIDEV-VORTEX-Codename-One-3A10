@@ -57,6 +57,7 @@ public class ServiceItineraire {
             JSONParser j = new JSONParser();
             Map<String, Object> IteneraireListJson
                     = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            System.out.println("looc"+IteneraireListJson);
             
             List<Map<String, Object>> list = (List<Map<String, Object>>) IteneraireListJson.get("root");
             for (Map<String, Object> obj : list) {
@@ -64,8 +65,8 @@ public class ServiceItineraire {
                 float id = Float.parseFloat(obj.get("id").toString());
                 i.setId((int) id);
                 
-                i.setPts_depart((String)obj.get("ptsDepart"));
-                i.setPts_arrive((String)obj.get("ptsArrive"));
+                i.setPts_depart((String)obj.get("pts_depart"));
+                i.setPts_arrive((String)obj.get("pts_arrive"));
                 
                iteneraires.add(i);
             }
