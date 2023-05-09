@@ -7,17 +7,20 @@ package Gui.Itineraire;
 
 import Entity.Iteneraire;
 import Entity.User;
+import Gui.User.UserHome;
 import Services.ServiceItineraire;
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import java.util.ArrayList;
@@ -41,6 +44,14 @@ public class AffichageItineraire extends Form{
 //    }
     public AffichageItineraire(User u,Form previous) {
     setTitle("List Itineraires");
+    Button back = new Button();
+        back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
+        back.addActionListener((evt) -> {
+        new UserHome(u,previous).show();
+        });
+        Container container = new Container(new FlowLayout(Component.LEFT));
+        container.add(back);
+        addComponent(container);
     setLayout(BoxLayout.y());
     ArrayList<Iteneraire> itineraires= ServiceItineraire.getInstance().getAllIteneraires();
         

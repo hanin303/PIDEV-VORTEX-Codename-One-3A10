@@ -7,10 +7,12 @@ package Gui.User;
 
 import Entity.User;
 import Gui.Itineraire.*;
+import Gui.Reclamation.*;
 import com.codename1.ui.Command;
 import com.codename1.ui.Form;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.util.Resources;
 
 /**
  *
@@ -53,12 +55,19 @@ public class UserHome extends Form{
          new ItineraireHome(u,previous).show();
     }
 };
+         Command rec = new Command("Mes réclamations") {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+         new Reclamationlist(u,previous).show();
+    }
+};
         if(u.getId_role()==1){
         
         getToolbar().addCommandToSideMenu(modifPass);
         getToolbar().addCommandToSideMenu(ajout);
         getToolbar().addCommandToSideMenu(users);
         getToolbar().addCommandToSideMenu(home_it);
+        getToolbar().addCommandToSideMenu(rec);
         getToolbar().addCommandToSideMenu(log);
     }else if(u.getId_role()==4){
         getToolbar().addCommandToSideMenu(modifPass);
