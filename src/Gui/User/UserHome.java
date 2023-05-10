@@ -7,6 +7,7 @@ package Gui.User;
 
 import Entity.User;
 import Gui.Itineraire.*;
+import Gui.Ligne.*;
 import Gui.Reclamation.*;
 import Gui.Reservation.*;
 import Gui.Ticket.*;
@@ -75,17 +76,35 @@ public class UserHome extends Form{
          new TicketHome(u,previous).show();
     }
 };
-        if(u.getId_role()==1){
-        
+         Command ligne = new Command("Lignes urbaines") {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+         new LigneHome(u,previous).show();
+    }
+};
+        if(u.getId_role()==1){ 
         getToolbar().addCommandToSideMenu(modifPass);
         getToolbar().addCommandToSideMenu(ajout);
         getToolbar().addCommandToSideMenu(users);
         getToolbar().addCommandToSideMenu(home_it);
+        getToolbar().addCommandToSideMenu(ligne);
+        getToolbar().addCommandToSideMenu(log);
+    }else if(u.getId_role()==2){
+        getToolbar().addCommandToSideMenu(modifPass);
+        getToolbar().addCommandToSideMenu(home_it);
+        getToolbar().addCommandToSideMenu(ligne);
         getToolbar().addCommandToSideMenu(rec);
         getToolbar().addCommandToSideMenu(log);
-    }else if(u.getId_role()==4){
+    }else if(u.getId_role()==3){
+        getToolbar().addCommandToSideMenu(modifPass);
+        getToolbar().addCommandToSideMenu(home_it);
+        getToolbar().addCommandToSideMenu(ligne);
+        getToolbar().addCommandToSideMenu(rec);
+        getToolbar().addCommandToSideMenu(log);
+    }else{
         getToolbar().addCommandToSideMenu(modifPass);
         getToolbar().addCommandToSideMenu(rec);
+        getToolbar().addCommandToSideMenu(ligne);
         getToolbar().addCommandToSideMenu(res);
         getToolbar().addCommandToSideMenu(ticket);
         getToolbar().addCommandToSideMenu(log);

@@ -47,7 +47,6 @@ public class ForgetEmail extends Form{
         send.addActionListener((evt) -> {
             ArrayList<String> code ;
             code= ServiceUser.getInstance().emailPass(temail.getText().toString());
-
             float id = Float.parseFloat(code.get(1).toString());
             ForgetCode forgetCode = new ForgetCode(code.get(0),(int)id,prev);
             forgetCode.show();
