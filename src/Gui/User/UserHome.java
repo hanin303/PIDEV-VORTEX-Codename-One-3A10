@@ -8,6 +8,8 @@ package Gui.User;
 import Entity.User;
 import Gui.Itineraire.*;
 import Gui.Reclamation.*;
+import Gui.Reservation.*;
+import Gui.Ticket.*;
 import com.codename1.ui.Command;
 import com.codename1.ui.Form;
 import com.codename1.ui.events.ActionEvent;
@@ -61,6 +63,18 @@ public class UserHome extends Form{
          new Reclamationlist(u,previous).show();
     }
 };
+         Command res = new Command("Mes réservations") {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+         new ReservationHome(u,previous).show();
+    }
+};
+        Command ticket = new Command("Mes tickets") {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+         new TicketHome(u,previous).show();
+    }
+};
         if(u.getId_role()==1){
         
         getToolbar().addCommandToSideMenu(modifPass);
@@ -71,6 +85,9 @@ public class UserHome extends Form{
         getToolbar().addCommandToSideMenu(log);
     }else if(u.getId_role()==4){
         getToolbar().addCommandToSideMenu(modifPass);
+        getToolbar().addCommandToSideMenu(rec);
+        getToolbar().addCommandToSideMenu(res);
+        getToolbar().addCommandToSideMenu(ticket);
         getToolbar().addCommandToSideMenu(log);
 
     }

@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Gui.Reservation;
+package Gui.Ticket;
 
 import Entity.User;
+import Gui.Reservation.AddReservationForm;
+import Gui.Reservation.ListReservations;
 import Gui.User.UserHome;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
@@ -21,15 +23,14 @@ import com.codename1.ui.util.Resources;
  *
  * @author hanin
  */
-public class ReservationHome extends Form {
-
-    public ReservationHome(User u, Form previous) {
+public class TicketHome extends Form{
+    public TicketHome(User u, Form prev) {
      
         setTitle("Home");
         Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
         back.addActionListener((evt) -> {
-        new UserHome(u,previous).show();
+        new UserHome(u,prev).show();
         });
         Container container = new Container(new FlowLayout(Component.LEFT));
         container.add(back);
@@ -37,22 +38,17 @@ public class ReservationHome extends Form {
         setLayout(BoxLayout.y());
         
         add(new Label("Choose an option"));
-        //Button btnAddReservation = new Button("Add Reservation");
-        Button btnAddReservation = new Button("Add Reservation");
-        FontImage icon = FontImage.createMaterial(FontImage.MATERIAL_ADD, "Button", 6);
-        btnAddReservation.setIcon(icon);
-        //Button btnListReservations = new Button("List Reservations");
-        Button btnListReservations = new Button("List Reservations");
-        FontImage icon2 = FontImage.createMaterial(FontImage.MATERIAL_CALENDAR_VIEW_DAY, "Button", 6);
-        btnListReservations.setIcon(icon2);
+        Button btnAddTicket = new Button("Add Ticket");
+        //Button btnListTickets = new Button("List Tickets");
+        Button btnListTickets = new Button("List Tickets");
+        FontImage icon = FontImage.createMaterial(FontImage.MATERIAL_LIST, "Button", 6);
+        btnListTickets.setIcon(icon);
 
         Resources  res = null;
-        btnAddReservation.addActionListener(e-> new AddReservationForm(u,previous,res).show());
-        //btnListTasks.addActionListener(e-> new ListTasksForm(this).show());
-        btnListReservations.addActionListener(e-> new ListReservations(u,this).show());
-        add(btnAddReservation);
-        add(btnListReservations);
+        btnAddTicket.addActionListener(e-> new AddTicketForm(u,prev,res).show());
+        btnListTickets.addActionListener(e-> new ListTickets(u,this).show());
+        add(btnAddTicket);
+        add(btnListTickets);
 
     }
-    
 }

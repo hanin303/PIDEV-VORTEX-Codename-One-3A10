@@ -5,13 +5,15 @@
  */
 package Entity;
 
+import java.util.Date;
+
 /**
  *
  * @author hanin
  */
 public class Reservation {
     private int id_reservation ;
-    private String date_reservation ;
+    private Date date_reservation ;
     private String heure_depart ;
     private String heure_arrive ;
     private String status;
@@ -23,7 +25,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int id_reservation, String date_reservation, String heure_depart, String heure_arrive, String status, String type_ticket, String id_client, String id_moy, String id_it) {
+    public Reservation(int id_reservation, Date date_reservation, String heure_depart, String heure_arrive, String status, String type_ticket, String id_client, String id_moy, String id_it) {
         this.id_reservation = id_reservation;
         this.date_reservation = date_reservation;
         this.heure_depart = heure_depart;
@@ -35,7 +37,7 @@ public class Reservation {
         this.id_it = id_it;
     }
 
-    public Reservation(String date_reservation, String heure_depart, String heure_arrive, String status, String type_ticket, String id_client, String id_moy, String id_it) {
+    public Reservation(Date date_reservation, String heure_depart, String heure_arrive, String status, String type_ticket, String id_client, String id_moy, String id_it) {
         this.date_reservation = date_reservation;
         this.heure_depart = heure_depart;
         this.heure_arrive = heure_arrive;
@@ -50,7 +52,7 @@ public class Reservation {
         return id_reservation;
     }
 
-    public String getDate_reservation() {
+    public Date getDate_reservation() {
         return date_reservation;
     }
 
@@ -86,7 +88,7 @@ public class Reservation {
         this.id_reservation = id_reservation;
     }
 
-    public void setDate_reservation(String date_reservation) {
+    public void setDate_reservation(Date date_reservation) {
         this.date_reservation = date_reservation;
     }
 
