@@ -10,6 +10,7 @@ import Gui.Itineraire.*;
 import Gui.Ligne.*;
 import Gui.Reclamation.*;
 import Gui.Reservation.*;
+import Gui.Station.*;
 import Gui.Ticket.*;
 import com.codename1.ui.Command;
 import com.codename1.ui.Form;
@@ -82,17 +83,25 @@ public class UserHome extends Form{
          new LigneHome(u,previous).show();
     }
 };
+        Command station = new Command("Stations") {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+         new StationHome(u,previous).show();
+    }
+};
         if(u.getId_role()==1){ 
         getToolbar().addCommandToSideMenu(modifPass);
         getToolbar().addCommandToSideMenu(ajout);
         getToolbar().addCommandToSideMenu(users);
         getToolbar().addCommandToSideMenu(home_it);
         getToolbar().addCommandToSideMenu(ligne);
+        getToolbar().addCommandToSideMenu(station);
         getToolbar().addCommandToSideMenu(log);
     }else if(u.getId_role()==2){
         getToolbar().addCommandToSideMenu(modifPass);
         getToolbar().addCommandToSideMenu(home_it);
         getToolbar().addCommandToSideMenu(ligne);
+        getToolbar().addCommandToSideMenu(station);
         getToolbar().addCommandToSideMenu(rec);
         getToolbar().addCommandToSideMenu(log);
     }else if(u.getId_role()==3){
