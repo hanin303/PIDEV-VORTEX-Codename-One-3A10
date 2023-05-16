@@ -145,7 +145,9 @@ public class AddUser extends Form{
         login.addPointerPressedListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-            new Login(prev).show();
+            //new Login(prev).show();
+            new AddUser(prev).show();
+            //new Login(prev).show();
            }
           });
     

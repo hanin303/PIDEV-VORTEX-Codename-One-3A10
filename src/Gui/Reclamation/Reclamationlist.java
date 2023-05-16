@@ -67,7 +67,7 @@ public class Reclamationlist extends BaseForm {
     
         
       
-        buttonsContainer.add(ajouterButton);
+    add(ajouterButton);
         
         
 //    buttonsContainer.add(ajouterButton);

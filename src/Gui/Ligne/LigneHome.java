@@ -40,29 +40,29 @@ public class LigneHome extends Form {
         add(new Label("Choose an option"));
         Button btnAddReservation = new Button("Add Ligne");
         Button btnListReservations = new Button("List Ligne");
-        //Button button = new Button("Visit Web site");
+        Button button = new Button("Visit Web site");
         Resources res = null;
         btnAddReservation.addActionListener(e-> new AddLigne(u,previous,res).show());
         //btnListTasks.addActionListener(e-> new ListTasksForm(this).show());
         btnListReservations.addActionListener(e-> new ListLigne(u,this).show());
         add(btnAddReservation);
         add(btnListReservations);
-//        add(button);
-//         button.addActionListener(evt -> {
-//            // Create a new web browser component
-//            WebBrowser webBrowser = new WebBrowser();
-//
-//            // Set the URL to load
-//            webBrowser.setURL("http://127.0.0.1:8000/login");
-//
-//            // Create a new form and add the web browser component to it
-//            Form webViewForm = new Form();
-//            webViewForm.setLayout(new BorderLayout());
-//            webViewForm.add(BorderLayout.CENTER, webBrowser);
-//
-//            // Show the new form
-//            webViewForm.show();
-//        });
+        add(button);
+         button.addActionListener(evt -> {
+            // Create a new web browser component
+            WebBrowser webBrowser = new WebBrowser();
+
+            // Set the URL to load
+            webBrowser.setURL("http://127.0.0.1:8000/login");
+
+            // Create a new form and add the web browser component to it
+            Form webViewForm = new Form();
+            webViewForm.setLayout(new BorderLayout());
+            webViewForm.add(BorderLayout.CENTER, webBrowser);
+
+            // Show the new form
+            webViewForm.show();
+        });
 
     }
     

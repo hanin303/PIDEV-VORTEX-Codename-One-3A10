@@ -41,11 +41,14 @@ public class EditPassword extends Form{
         tmdp2.setConstraint(TextField.PASSWORD);
         Button modif = new Button("Modifier");
         modif.addActionListener((evt) -> {
+            if(tmdp1.getText().equals(tmdp2.getText())){
             if(ServiceUser.getService().modifPass(u.getId_user(),tmdp1.getText())){
                 Dialog.show("Success", "Mot de passe modifié avec succés", "OK", null);
                 UserHome refresh = new UserHome(u,prev);
                 refresh.show();  
-            }                    
+            }   }else{
+            Dialog.show("Error", "Vous devez saisir deux mots de passe identiques", "OK", null); 
+            }                 
         });
         addAll(lmdp1,tmdp1,lmdp2,tmdp2,modif);
     }

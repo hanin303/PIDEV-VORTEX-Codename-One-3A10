@@ -73,6 +73,8 @@ public class AddTicketForm extends Form{
                 Services.ServiceTicket.getInstance().AjouterTicket(t);
                 iDialog.dispose();
                 refreshTheme();
+                Dialog.show("Ticket ajoutée avec succès", "", "OK", null);
+
                
             }
         }catch(Exception ex){

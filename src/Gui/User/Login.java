@@ -35,9 +35,9 @@ public class Login extends Form {
         Button con = new Button("connecter");
         con.addActionListener((evt) -> {
             ServiceUser.getInstance().login(tusername.getText().toString(),tmdp.getText().toString());
-            User u1 = ServiceUser.getInstance().login(tusername.getText().toString(), tmdp.getText().toString());
+            User u = ServiceUser.getInstance().login(tusername.getText().toString(), tmdp.getText().toString());
             Dialog.show("Success", "Connecté avec succés", "OK", null);
-            new UserHome(u1,prev).show();
+            new UserHome(u,prev).show();
         });
         addAll(lusername,tusername,lmdp,tmdp,con);
         Label addU = new Label("Créer votre compte");

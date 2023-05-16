@@ -24,7 +24,7 @@ import com.codename1.ui.layouts.FlowLayout;
 public class ChangePassword extends Form{
     public ChangePassword(int id,Form prev){
         setTitle("Récupération de mot de passe");
-        Button back = new Button();
+        /*Button back = new Button();
         back.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, back.getStyle()));
         back.addActionListener((evt) -> {
         new Login(prev).show();
@@ -32,7 +32,7 @@ public class ChangePassword extends Form{
 
         Container container = new Container(new FlowLayout(Component.LEFT));
         container.add(back);
-        addComponent(container);
+        addComponent(container);*/
         setLayout(BoxLayout.yCenter()); 
         Label lmdp1 = new Label("Mot de passe:");
         TextField tmdp1 = new TextField();
@@ -42,10 +42,14 @@ public class ChangePassword extends Form{
         tmdp2.setConstraint(TextField.PASSWORD);
         Button modif = new Button("Modifier");
         modif.addActionListener((evt) -> {
+            if(tmdp1.getText().equals(tmdp2.getText())){
             if(ServiceUser.getService().modifPass(id,tmdp1.getText())){
                 Dialog.show("Success", "Mot de passe modifié avec succés", "OK", null);
+                //new Login(prev).show();
                 new Login(prev).show();
-            }    
+            } }else{
+            Dialog.show("Error", "Vous devez saisir deux mots de passe identiques", "OK", null);
+            } 
         });
         addAll(lmdp1,tmdp1,lmdp2,tmdp2,modif);
     }

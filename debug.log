@@ -29,3 +29,20 @@
 [0510/022942.441:INFO:CONSOLE(99)] "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyCy-fMWerzvXcPCV0FDI07hW2DAzs_mnpY&callback=initMap (99)
 [0510/022942.943:WARNING:spdy_session.cc(3365)] Received HEADERS for invalid stream 5
 [0510/022950.939:INFO:CONSOLE(22)] "Here I am !!!", source: https://cn1app/streams/1 (22)
+[0510/092958.056:INFO:CONSOLE(99)] "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyCy-fMWerzvXcPCV0FDI07hW2DAzs_mnpY&callback=initMap (99)
+[0510/093005.732:INFO:CONSOLE(22)] "Here I am !!!", source: https://cn1app/streams/1 (22)
+[0510/093116.850:INFO:CONSOLE(99)] "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyCy-fMWerzvXcPCV0FDI07hW2DAzs_mnpY&callback=initMap (99)
+[0510/093556.091:INFO:CONSOLE(303)] "Google Maps JavaScript API has been loaded directly without a callback. This is not supported and can lead to race conditions and suboptimal performance. For supported loading patterns please see https://goo.gle/js-api-loading", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyDVpdxQ5VonotjFU5u01A1hAwVsf4PElo0&libraries=places (303)
+[0510/093556.095:INFO:CONSOLE(11)] "Failed to find a valid digest in the 'integrity' attribute for resource 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css' with computed SHA-256 integrity 'BAg/zs3Z4ZsqzR4Ac0N6oHyY0jDwGY1/H9RwqyIP72Q='. The resource has been blocked.", source: http://127.0.0.1:8000/home (11)
+[0510/093556.104:INFO:CONSOLE(74)] "Uncaught ReferenceError: map is not defined", source: http://127.0.0.1:8000/home (74)
+[0510/093556.245:INFO:CONSOLE(93)] "Uncaught (in promise) TypeError: Cannot read property 'ownerDocument' of null", source: https://maps.googleapis.com/maps-api-v3/api/js/53/2/places_impl.js (93)
+[0510/101434.901:INFO:CONSOLE(99)] "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyCy-fMWerzvXcPCV0FDI07hW2DAzs_mnpY&callback=initMap (99)
+[0510/101435.468:WARNING:spdy_session.cc(3365)] Received HEADERS for invalid stream 5
+[0510/101443.078:INFO:CONSOLE(22)] "Here I am !!!", source: https://cn1app/streams/1 (22)
+[0510/102053.107:INFO:CONSOLE(99)] "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyCy-fMWerzvXcPCV0FDI07hW2DAzs_mnpY&callback=initMap (99)
+[0510/102102.730:INFO:CONSOLE(22)] "Here I am !!!", source: https://cn1app/streams/1 (22)
+[0510/102135.974:INFO:CONSOLE(99)] "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyCy-fMWerzvXcPCV0FDI07hW2DAzs_mnpY&callback=initMap (99)
+[0510/102145.412:INFO:CONSOLE(22)] "Here I am !!!", source: https://cn1app/streams/2 (22)
+[0511/095445.828:INFO:CONSOLE(99)] "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started", source: https://maps.googleapis.com/maps/api/js?key=AIzaSyCy-fMWerzvXcPCV0FDI07hW2DAzs_mnpY&callback=initMap (99)
+[0511/095446.391:WARNING:spdy_session.cc(3365)] Received HEADERS for invalid stream 5
+[0511/095454.357:INFO:CONSOLE(22)] "Here I am !!!", source: https://cn1app/streams/1 (22)

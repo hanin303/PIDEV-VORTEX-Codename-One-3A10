@@ -71,7 +71,7 @@ public class UserHome extends Form{
          new ReservationHome(u,previous).show();
     }
 };
-        Command ticket = new Command("Mes tickets") {
+        Command ticket = new Command("Tickets") {
         @Override
         public void actionPerformed(ActionEvent evt) {
          new TicketHome(u,previous).show();
@@ -96,6 +96,7 @@ public class UserHome extends Form{
         getToolbar().addCommandToSideMenu(home_it);
         getToolbar().addCommandToSideMenu(ligne);
         getToolbar().addCommandToSideMenu(station);
+        getToolbar().addCommandToSideMenu(ticket);
         getToolbar().addCommandToSideMenu(log);
     }else if(u.getId_role()==2){
         getToolbar().addCommandToSideMenu(modifPass);
@@ -115,7 +116,6 @@ public class UserHome extends Form{
         getToolbar().addCommandToSideMenu(rec);
         getToolbar().addCommandToSideMenu(ligne);
         getToolbar().addCommandToSideMenu(res);
-        getToolbar().addCommandToSideMenu(ticket);
         getToolbar().addCommandToSideMenu(log);
 
     }

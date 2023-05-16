@@ -191,7 +191,7 @@ public class ServiceUserTest {
     public void test$$anonymousClasses() {
         System.out.println("$$anonymousClasses");
         ServiceUser instance = null;
-        instance.$$anonymousClasses();
+      //  instance.$$anonymousClasses();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
